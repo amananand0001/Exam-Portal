@@ -33,16 +33,28 @@ const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL ||
   .map((value) => value.trim())
   .filter(Boolean);
 
+// Optional domain suffix allow-list via FRONTEND_ORIGIN_SUFFIXES, e.g.: ".netlify.app,.vercel.app"
+const allowedOriginSuffixes = (process.env.FRONTEND_ORIGIN_SUFFIXES || '')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean);
+
+console.log('CORS allowed origins:', allowedOrigins);
+if (allowedOriginSuffixes.length > 0) {
+  console.log('CORS allowed origin suffixes:', allowedOriginSuffixes);
+}
+
 const corsOptions = {
   origin: (origin, callback) => {
     // Allow non-browser requests or same-origin (no Origin header)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (allowedOriginSuffixes.some((suffix) => origin.endsWith(suffix))) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  // Let cors package reflect requested methods/headers automatically
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));

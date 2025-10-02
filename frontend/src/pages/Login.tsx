@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     setIsUnlocking(true);
 
     try {
-      const response = await fetch('http://localhost:5001/api/students/login', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/students/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

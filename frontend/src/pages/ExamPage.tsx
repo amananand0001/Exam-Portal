@@ -255,7 +255,7 @@ const ExamPage: React.FC = () => {
         }
 
         // Fetch questions from API
-        const response = await fetch('http://localhost:5001/api/questions');
+        const response = await fetch('https://exam-portal-7hg7.onrender.com/api/questions');
         const data = await response.json();
         
         if (data.success) {
@@ -400,7 +400,7 @@ const ExamPage: React.FC = () => {
       const studentSession = JSON.parse(sessionData);
 
       // Submit exam results
-      const response = await fetch('http://localhost:5001/api/results/submit', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/results/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

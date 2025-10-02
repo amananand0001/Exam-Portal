@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
     setSubmitStatus({ type: null, message: '' });
 
     try {
-      const response = await fetch('http://localhost:5001/api/contacts', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

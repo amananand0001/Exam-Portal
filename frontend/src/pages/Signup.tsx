@@ -32,7 +32,7 @@ const SignupPage: React.FC = () => {
     setIsUnlocking(true);
 
     try {
-      const response = await fetch('http://localhost:5001/api/students/signup', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/students/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

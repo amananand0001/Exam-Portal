@@ -1,0 +1,123 @@
+[
+    {
+        "question": "Before administering digoxin, which vital sign is most important for the nurse to assess?",
+        "choiceA": "Blood pressure",
+        "choiceB": "Heart rate",
+        "choiceC": "Respiratory rate",
+        "choiceD": "Temperature",
+        "answer": "B"
+    },
+    {
+        "question": "A patient receiving a blood transfusion develops chills, fever, and back pain. What should the nurse do first?",
+        "choiceA": "Slow the transfusion",
+        "choiceB": "Notify the physician",
+        "choiceC": "Stop the transfusion",
+        "choiceD": "Administer acetaminophen",
+        "answer": "C"
+    },
+    {
+        "question": "Which diet is most appropriate for a patient with hypertension?",
+        "choiceA": "Low sodium, low fat",
+        "choiceB": "High protein, low potassium",
+        "choiceC": "High sodium, low cholesterol",
+        "choiceD": "High carbohydrate, low fiber",
+        "answer": "A"
+    },
+    {
+        "question": "A COPD patient requires oxygen therapy. Which method is safest?",
+        "choiceA": "Non-rebreather mask",
+        "choiceB": "Simple face mask",
+        "choiceC": "Nasal cannula 1–2 L/min",
+        "choiceD": "Venturi mask at 10 L/min",
+        "answer": "C"
+    },
+    {
+        "question": "Which assessment is most important for a patient receiving morphine?",
+        "choiceA": "Heart rate",
+        "choiceB": "Respiratory rate",
+        "choiceC": "Blood pressure",
+        "choiceD": "Temperature",
+        "answer": "B"
+    },
+    {
+        "question": "Which statement shows correct understanding of insulin administration?",
+        "choiceA": "I will rotate injection sites.",
+        "choiceB": "I will inject insulin into muscles.",
+        "choiceC": "I can reuse needles.",
+        "choiceD": "I will shake insulin vials before use.",
+        "answer": "A"
+    },
+    {
+        "question": "Which type of isolation precaution is required for tuberculosis?",
+        "choiceA": "Contact",
+        "choiceB": "Droplet",
+        "choiceC": "Airborne",
+        "choiceD": "Protective",
+        "answer": "C"
+    },
+    {
+        "question": "What should the nurse do first when a patient is having a seizure?",
+        "choiceA": "Restrain the arms and legs",
+        "choiceB": "Insert a tongue blade",
+        "choiceC": "Turn the patient to the side",
+        "choiceD": "Give IV diazepam immediately",
+        "answer": "C"
+    },
+    {
+        "question": "Which lab finding is most concerning for a patient receiving chemotherapy?",
+        "choiceA": "Hemoglobin 12 g/dL",
+        "choiceB": "WBC 2000/mm³",
+        "choiceC": "Platelets 200,000/mm³",
+        "choiceD": "Sodium 139 mEq/L",
+        "answer": "B"
+    },
+    {
+        "question": "Which lab should be monitored closely for a patient on furosemide?",
+        "choiceA": "Potassium",
+        "choiceB": "Calcium",
+        "choiceC": "Sodium",
+        "choiceD": "Hematocrit",
+        "answer": "A"
+    },
+    {
+        "question": "Which finding requires immediate action after surgery?",
+        "choiceA": "Serosanguineous drainage",
+        "choiceB": "No bowel sounds for 12 hours",
+        "choiceC": "Blood pressure 78/40 mmHg",
+        "choiceD": "Pain score 7/10",
+        "answer": "C"
+    },
+    {
+        "question": "Which patient should the nurse see first?",
+        "choiceA": "Asthma patient with wheezing",
+        "choiceB": "COPD patient with SpO₂ 88%",
+        "choiceC": "Pneumonia patient with fever 38.5°C",
+        "choiceD": "Post-op patient with pain 8/10",
+        "answer": "A"
+    },
+    {
+        "question": "What must be done before giving medication through a nasogastric tube?",
+        "choiceA": "Crush all medications together",
+        "choiceB": "Flush tube with water",
+        "choiceC": "Check tube placement",
+        "choiceD": "Mix with feeding solution",
+        "answer": "C"
+    },
+    {
+        "question": "Which food should be limited for a patient on warfarin?",
+        "choiceA": "Oranges",
+        "choiceB": "Spinach",
+        "choiceC": "Bananas",
+        "choiceD": "Apples",
+        "answer": "B"
+    },
+    {
+        "question": "Which lab test monitors heparin therapy?",
+        "choiceA": "INR",
+        "choiceB": "aPTT",
+        "choiceC": "Platelets",
+        "choiceD": "Hemoglobin",
+        "answer": "B"
+    }
+    
+]

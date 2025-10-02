@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&family=Barlow:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', 'Source Sans Pro', 'Barlow', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Colors */
+    --global-bg-1: #14685a;
+    --global-bg-2: #c4c4c4;
+    --global-bg-3: #d9d9d9;
+    --global-bg-4: #ebf6f4;
+    --global-bg-5: #ebf7f5;
+    --global-bg-6: #f5e7d6;
+    --global-bg-7: #f5e7d7;
+    --global-bg-8: #f6f6f6;
+    --global-bg-9: #fdfdfd;
+    --global-bg-10: #ffffff;
+
+    /* Text Colors */
+    --global-text-1: #14685a;
+    --global-text-2: #1d1c1c;
+    --global-text-3: #1d1d1c;
+    --global-text-4: #222831;
+    --global-text-5: #fdfdfd;
+    --global-text-6: #ffc700;
+  }
+}
+
+@layer utilities {
+  /* Global Background Colors */
+  .bg-global-1 {
+    background-color: var(--global-bg-1);
+  }
+  .bg-global-2 {
+    background-color: var(--global-bg-2);
+  }
+  .bg-global-3 {
+    background-color: var(--global-bg-3);
+  }
+  .bg-global-4 {
+    background-color: var(--global-bg-4);
+  }
+  .bg-global-5 {
+    background-color: var(--global-bg-5);
+  }
+  .bg-global-6 {
+    background-color: var(--global-bg-6);
+  }
+  .bg-global-7 {
+    background-color: var(--global-bg-7);
+  }
+  .bg-global-8 {
+    background-color: var(--global-bg-8);
+  }
+  .bg-global-9 {
+    background-color: var(--global-bg-9);
+  }
+  .bg-global-10 {
+    background-color: var(--global-bg-10);
+  }
+
+  /* Global Text Colors */
+  .text-global-1 {
+    color: var(--global-text-1);
+  }
+  .text-global-2 {
+    color: var(--global-text-2);
+  }
+  .text-global-3 {
+    color: var(--global-text-3);
+  }
+  .text-global-4 {
+    color: var(--global-text-4);
+  }
+  .text-global-5 {
+    color: var(--global-text-5);
+  }
+  .text-global-6 {
+    color: var(--global-text-6);
+  }
+}

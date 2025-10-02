@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: srb-marine-backend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: FRONTEND_URL
+        sync: false
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+    disk:
+      name: srb-marine-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1

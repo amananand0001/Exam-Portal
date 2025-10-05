@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { pool, generateStudentId } = require('../database');
+const { pool, generateCandidateId } = require('../database');
 
-// Student login endpoint
+// Candidate login endpoint
 router.post('/login', async (req, res) => {
   try {
     const { name, phoneNumber, countryCode } = req.body;
@@ -31,9 +31,9 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Check if student exists with the provided credentials
+    // Check if Candidate exists with the provided credentials
     const result = await pool.query(
-      'SELECT id, student_id, name, date_of_birth, phone_number, country_code, created_at FROM students WHERE name = $1 AND phone_number = $2 AND country_code = $3',
+      'SELECT id, Candidate_id, name, date_of_birth, phone_number, country_code, created_at FROM Candidates WHERE name = $1 AND phone_number = $2 AND country_code = $3',
       [name.trim(), phoneNumber.trim(), countryCode]
     );
 
@@ -44,9 +44,9 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    const student = result.rows[0];
+    const Candidate = result.rows[0];
 
-    // Check if student has already attempted the exam
+    // Check if Candidate has already attempted the exam
     const examResult = await pool.query(
       'SELECT id FROM exam_results WHERE phone_number = $1',
       [phoneNumber.trim()]
@@ -55,15 +55,15 @@ router.post('/login', async (req, res) => {
     if (examResult.rows.length > 0) {
       return res.status(409).json({
         success: false,
-        message: 'Student has already attempted the exam',
+        message: 'Candidate has already attempted the exam',
         hasAttempted: true,
         data: {
-          studentId: student.student_id,
-          name: student.name,
-          dateOfBirth: student.date_of_birth,
-          phoneNumber: student.phone_number,
-          countryCode: student.country_code,
-          createdAt: student.created_at
+          CandidateId: Candidate.Candidate_id,
+          name: Candidate.name,
+          dateOfBirth: Candidate.date_of_birth,
+          phoneNumber: Candidate.phone_number,
+          countryCode: Candidate.country_code,
+          createdAt: Candidate.created_at
         }
       });
     }
@@ -72,17 +72,17 @@ router.post('/login', async (req, res) => {
       success: true,
       message: 'Login successful',
       data: {
-        studentId: student.student_id,
-        name: student.name,
-        dateOfBirth: student.date_of_birth,
-        phoneNumber: student.phone_number,
-        countryCode: student.country_code,
-        createdAt: student.created_at
+        CandidateId: Candidate.Candidate_id,
+        name: Candidate.name,
+        dateOfBirth: Candidate.date_of_birth,
+        phoneNumber: Candidate.phone_number,
+        countryCode: Candidate.country_code,
+        createdAt: Candidate.created_at
       }
     });
 
   } catch (error) {
-    console.error('Error in student login:', error);
+    console.error('Error in Candidate login:', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -91,7 +91,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Student signup endpoint
+// Candidate signup endpoint
 router.post('/signup', async (req, res) => {
   try {
     const { name, dateOfBirth, phoneNumber, countryCode } = req.body;
@@ -132,45 +132,45 @@ router.post('/signup', async (req, res) => {
 
                     // Check if phone number already exists
                 const existingPhone = await pool.query(
-                  'SELECT id FROM students WHERE phone_number = $1 AND country_code = $2',
+                  'SELECT id FROM Candidates WHERE phone_number = $1 AND country_code = $2',
                   [phoneNumber, countryCode]
                 );
 
                 if (existingPhone.rows.length > 0) {
                   return res.status(409).json({
                     success: false,
-                    message: 'A student with this phone number already exists'
+                    message: 'A Candidate with this phone number already exists'
                   });
                 }
 
-    // Generate unique student ID
-    const studentId = await generateStudentId();
+    // Generate unique Candidate ID
+    const CandidateId = await generateCandidateId();
 
-                    // Insert new student
+                    // Insert new Candidate
                 const result = await pool.query(
-                  `INSERT INTO students (student_id, name, date_of_birth, phone_number, country_code)
+                  `INSERT INTO Candidates (Candidate_id, name, date_of_birth, phone_number, country_code)
                    VALUES ($1, $2, $3, $4, $5)
-                   RETURNING id, student_id, name, date_of_birth, phone_number, country_code, created_at`,
-                  [studentId, name.trim(), dateOfBirth, phoneNumber.trim(), countryCode]
+                   RETURNING id, Candidate_id, name, date_of_birth, phone_number, country_code, created_at`,
+                  [CandidateId, name.trim(), dateOfBirth, phoneNumber.trim(), countryCode]
                 );
 
-                const newStudent = result.rows[0];
+                const newCandidate = result.rows[0];
 
                     res.status(201).json({
                   success: true,
-                  message: 'Student registered successfully',
+                  message: 'Candidate registered successfully',
                   data: {
-                    studentId: newStudent.student_id,
-                    name: newStudent.name,
-                    dateOfBirth: newStudent.date_of_birth,
-                    phoneNumber: newStudent.phone_number,
-                    countryCode: newStudent.country_code,
-                    createdAt: newStudent.created_at
+                    CandidateId: newCandidate.Candidate_id,
+                    name: newCandidate.name,
+                    dateOfBirth: newCandidate.date_of_birth,
+                    phoneNumber: newCandidate.phone_number,
+                    countryCode: newCandidate.country_code,
+                    createdAt: newCandidate.created_at
                   }
                 });
 
   } catch (error) {
-    console.error('Error in student signup:', error);
+    console.error('Error in Candidate signup:', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -179,11 +179,11 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-            // Get all students (for admin purposes)
+            // Get all Candidates (for admin purposes)
             router.get('/', async (req, res) => {
               try {
                 const result = await pool.query(
-                  'SELECT student_id, name, date_of_birth, phone_number, country_code, created_at FROM students ORDER BY created_at DESC'
+                  'SELECT Candidate_id, name, date_of_birth, phone_number, country_code, created_at FROM Candidates ORDER BY created_at DESC'
                 );
 
                 res.json({
@@ -191,7 +191,7 @@ router.post('/signup', async (req, res) => {
                   data: result.rows
                 });
               } catch (error) {
-                console.error('Error fetching students:', error);
+                console.error('Error fetching Candidates:', error);
                 res.status(500).json({
                   success: false,
                   message: 'Internal server error'
@@ -199,20 +199,20 @@ router.post('/signup', async (req, res) => {
               }
             });
 
-            // Get student by ID
-            router.get('/:studentId', async (req, res) => {
+            // Get Candidate by ID
+            router.get('/:CandidateId', async (req, res) => {
               try {
-                const { studentId } = req.params;
+                const { CandidateId } = req.params;
 
                 const result = await pool.query(
-                  'SELECT student_id, name, date_of_birth, phone_number, country_code, created_at FROM students WHERE student_id = $1',
-                  [studentId]
+                  'SELECT Candidate_id, name, date_of_birth, phone_number, country_code, created_at FROM Candidates WHERE Candidate_id = $1',
+                  [CandidateId]
                 );
 
                 if (result.rows.length === 0) {
                   return res.status(404).json({
                     success: false,
-                    message: 'Student not found'
+                    message: 'Candidate not found'
                   });
                 }
 
@@ -221,7 +221,7 @@ router.post('/signup', async (req, res) => {
                   data: result.rows[0]
                 });
               } catch (error) {
-                console.error('Error fetching student:', error);
+                console.error('Error fetching Candidate:', error);
                 res.status(500).json({
                   success: false,
                   message: 'Internal server error'

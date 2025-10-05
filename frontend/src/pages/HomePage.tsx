@@ -120,7 +120,7 @@ description: 'Hundreds of successful NCLEX pass rates with comprehensive study m
     {
       icon: '/images/img_vector_white_a700.svg',
       title: 'Personalized Learning Support',
-description: 'From study planning to career guidance, we provide individualized support for every nursing student.'
+description: 'From study planning to career guidance, we provide individualized support for every nursing Candidate.'
     },
     {
       icon: '/images/img_vector_white_a700_20x20.svg',
@@ -283,7 +283,7 @@ Empowering Future Nurses with Excellence and Compassion
                     </h3>
                   </div>
                   <p className="text-base lg:text-lg font-inter font-normal leading-6 lg:leading-7 text-global-3">
-Founded with the belief that healthcare belongs to compassionate and dedicated individuals, Exam Portal has become a guiding light for aspiring nurses across the nation. Whether it's passing the NCLEX, advancing your nursing education, or securing positions in top healthcare facilities, we prepare our students not just for exams – but for transformative healthcare careers.
+Founded with the belief that healthcare belongs to compassionate and dedicated individuals, Exam Portal has become a guiding light for aspiring nurses across the nation. Whether it's passing the NCLEX, advancing your nursing education, or securing positions in top healthcare facilities, we prepare our Candidates not just for exams – but for transformative healthcare careers.
                   </p>
                 </div>
                 <Button
@@ -510,7 +510,7 @@ Message from Our Founder
 "From humble beginnings to healthcare excellence, Exam Portal was born from a personal calling: to open doors for aspiring nurses who dream of making a difference."
 </blockquote>
 <p className="text-lg lg:text-xl font-inter font-semibold leading-6 lg:leading-7 text-white mt-6">
-We don't just prepare students for exams - we nurture compassionate healers. At Exam Portal, nursing excellence is not a goal, it's our commitment.
+We don't just prepare Candidates for exams - we nurture compassionate healers. At Exam Portal, nursing excellence is not a goal, it's our commitment.
 </p>
 </div>
             </div>

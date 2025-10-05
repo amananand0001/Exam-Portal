@@ -149,7 +149,7 @@ const AboutUs: React.FC = () => {
                 {showMore && (
                   <>
                     <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-5 text-justify animate-fadeIn">
-                      Founded on a deep understanding of the healthcare industry, our mission is to bridge nursing education with career success. We provide expert NCLEX preparation, personalized study guidance, and comprehensive career placement assistance, ensuring our students are not just prepared for exams, but for a transformative nursing career journey. We stand by you at every step, navigating challenges so you can chart a clear course to nursing excellence.
+                      Founded on a deep understanding of the healthcare industry, our mission is to bridge nursing education with career success. We provide expert NCLEX preparation, personalized study guidance, and comprehensive career placement assistance, ensuring our Candidates are not just prepared for exams, but for a transformative nursing career journey. We stand by you at every step, navigating challenges so you can chart a clear course to nursing excellence.
                     </p>
                     <button
                       onClick={() => setShowMore(false)}
@@ -208,7 +208,7 @@ const AboutUs: React.FC = () => {
               <div className="bg-white p-10 rounded-lg shadow-lg border-t-4 border-red-500 hover:-translate-y-3 hover:shadow-2xl transition-transform transition-shadow duration-300">
                 <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">Proven NCLEX Success</h3>
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-5">
-With hundreds of successful NCLEX pass rates nationwide, our track record speaks for itself. We've helped countless nursing students achieve their licensing goals.                </p>
+With hundreds of successful NCLEX pass rates nationwide, our track record speaks for itself. We've helped countless nursing Candidates achieve their licensing goals.                </p>
                 
               </div>
               
@@ -240,7 +240,7 @@ Our extensive network includes top healthcare facilities across the nation. We p
                 <h6 className="text-red-600 text-xs font-bold tracking-wider mb-3">OUR COMMITMENT</h6>
                 <h2 className="text-3xl md:text-5xl font-bold text-blue-800 mb-8 leading-tight">Our Mission & Distinct Advantage</h2>
                 <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-5 text-justify">
-                To empower every nursing student with the knowledge, confidence, and support needed to build successful healthcare careers. We meticulously bridge education and opportunity through our expert NCLEX preparation programs, trusted career guidance, and unwavering lifelong support. Your nursing success is the compass that guides our every endeavor.
+                To empower every nursing Candidate with the knowledge, confidence, and support needed to build successful healthcare careers. We meticulously bridge education and opportunity through our expert NCLEX preparation programs, trusted career guidance, and unwavering lifelong support. Your nursing success is the compass that guides our every endeavor.
                 </p>
                 <div ref={cardsRef} className="grid grid-cols-3 gap-2 md:gap-5 mb-6 ml-[0vw] md:ml-[-10vw]">
                   <div className="bg-blue-600 text-white p-3 md:p-5 text-center rounded-lg">
@@ -271,7 +271,7 @@ Our extensive network includes top healthcare facilities across the nation. We p
               <div>
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-8 leading-tight">A Message From Our Founder</h2>
                 <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  "From humble beginnings to healthcare excellence, Nursing Exam Portal was born from a personal calling: to open doors for aspiring nurses who dream of making a difference. We don't just teach exam strategies—we nurture compassionate healers. At Nursing Exam Portal, nursing excellence is not just a goal; it's a commitment ingrained in every program and student we guide. We are dedicated to fostering a new generation of skilled, confident, and care-ready registered nurses."
+                  "From humble beginnings to healthcare excellence, Nursing Exam Portal was born from a personal calling: to open doors for aspiring nurses who dream of making a difference. We don't just teach exam strategies—we nurture compassionate healers. At Nursing Exam Portal, nursing excellence is not just a goal; it's a commitment ingrained in every program and Candidate we guide. We are dedicated to fostering a new generation of skilled, confident, and care-ready registered nurses."
                 </p>
               </div>
               <div className={`grid grid-cols-3 gap-5 ${founderVisible ? 'animate-fadeInRight' : 'opacity-0'}`}>
@@ -306,7 +306,7 @@ Our extensive network includes top healthcare facilities across the nation. We p
               <div className={`lg:order-1 ${careerVisible ? 'animate-fadeInLeft' : 'opacity-0'}`}>
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-8 leading-tight">Specialized Nursing & Advanced Practice</h2>
                 <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Dreaming of an advanced nursing career? We support nurses pursuing specialized roles in ICU, Emergency, Pediatrics, Oncology, and other critical care areas. We welcome candidates with various nursing backgrounds, providing comprehensive support from specialty certification preparation to advanced practice degree guidance, ensuring you're prepared for the next level of your nursing career.
+                  Dreaming of an advanced nursing career? We support nurses pursuing specialized roles in ICU, Emergency, Pediatrics, Oncology, and other critical care areas. We welcome Candidates with various nursing backgrounds, providing comprehensive support from specialty certification preparation to advanced practice degree guidance, ensuring you're prepared for the next level of your nursing career.
                 </p>
               </div>
             </div>

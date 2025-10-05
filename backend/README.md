@@ -4,10 +4,10 @@ This is the backend API for the SRB Marine Exam Portal, built with Node.js, Expr
 
 ## Features
 
-- **Student Registration**: Register students with unique IDs
+- **Candidate Registration**: Register Candidates with unique IDs
 - **Question Management**: Store and retrieve exam questions from database
 - **Exam Results**: Calculate and store exam results with detailed analytics
-- **Session Management**: Handle student sessions
+- **Session Management**: Handle Candidate sessions
 - **Security**: Rate limiting, CORS, and input validation
 - **Database**: PostgreSQL with NeonDB for cloud hosting
 
@@ -50,7 +50,12 @@ This is the backend API for the SRB Marine Exam Portal, built with Node.js, Expr
    JWT_EXPIRES_IN=24h
 
    # CORS Configuration
+   # Either single origin:
    FRONTEND_URL=http://localhost:5173
+   # Or multiple explicit origins (comma-separated):
+   # FRONTEND_URLS=http://localhost:5173,https://your-site.netlify.app
+   # Or allow domains by suffix (use cautiously):
+   # FRONTEND_ORIGIN_SUFFIXES=.netlify.app,.vercel.app
    ```
 
 ### 3. Install Dependencies
@@ -71,15 +76,15 @@ npm start
 
 The server will automatically:
 - Connect to your NeonDB database
-- Create the necessary tables (students, questions)
+- Create the necessary tables (Candidates, questions)
 - Seed the questions from the `aptitude_questions.json` file
 
 ## API Endpoints
 
-### Students
-- `POST /api/students/signup` - Register a new student
-- `GET /api/students` - Get all students (admin)
-- `GET /api/students/:studentId` - Get student by ID
+### Candidates
+- `POST /api/Candidates/signup` - Register a new Candidate
+- `GET /api/Candidates` - Get all Candidates (admin)
+- `GET /api/Candidates/:CandidateId` - Get Candidate by ID
 
 ### Questions
 - `GET /api/questions` - Get all questions (limited to 20)
@@ -87,7 +92,7 @@ The server will automatically:
 
 ### Results
 - `POST /api/results/submit` - Submit exam results
-- `GET /api/results/student/:studentId` - Get results for a specific student
+- `GET /api/results/Candidate/:CandidateId` - Get results for a specific Candidate
 - `GET /api/results/all` - Get all exam results (admin)
 
 ### Health Check
@@ -95,11 +100,11 @@ The server will automatically:
 
 ## Database Schema
 
-### Students Table
+### Candidates Table
 ```sql
-CREATE TABLE students (
+CREATE TABLE Candidates (
   id SERIAL PRIMARY KEY,
-  student_id VARCHAR(20) UNIQUE NOT NULL,
+  Candidate_id VARCHAR(20) UNIQUE NOT NULL,
   name VARCHAR(255) NOT NULL,
   date_of_birth DATE NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
@@ -128,8 +133,8 @@ CREATE TABLE questions (
 ```sql
 CREATE TABLE exam_results (
   id SERIAL PRIMARY KEY,
-  student_id VARCHAR(20) NOT NULL,
-  student_name VARCHAR(255) NOT NULL,
+  Candidate_id VARCHAR(20) NOT NULL,
+  Candidate_name VARCHAR(255) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
   date_of_birth DATE NOT NULL,
   exam_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -138,13 +143,13 @@ CREATE TABLE exam_results (
   percentage DECIMAL(5,2) NOT NULL,
   answers JSONB NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+  FOREIGN KEY (Candidate_id) REFERENCES Candidates(Candidate_id) ON DELETE CASCADE
 );
 ```
 
-## Student ID Format
+## Candidate ID Format
 
-Student IDs are generated in the format: `YYYY####`
+Candidate IDs are generated in the format: `YYYY####`
 - `YYYY` = Current year
 - `####` = Sequential number (0001, 0002, etc.)
 

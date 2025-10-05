@@ -227,23 +227,6 @@ const Submitted: React.FC = () => {
           </div>
         )}
 
-        {/* SRB Marine Logo */}
-        <div className={`mb-6 sm:mb-8 transition-all duration-700 transform ${
-          showContent ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-75'
-        }`} style={{ animationDelay: '0.7s' }}>
-          <div className="inline-block animate-bounce" style={{ animationDelay: '1s', animationDuration: '2s' }}>
-            <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-2 relative">
-              <div className="w-full h-full rounded-full flex items-center justify-center" style={{backgroundColor: '#1D4ED8'}}>
-                <img 
-                  src="/SRB-Marine-1001.png" 
-                  alt="SRB Marine Logo" 
-                  className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Return to Home Button */}
         <button
           onClick={handleReturnHome}

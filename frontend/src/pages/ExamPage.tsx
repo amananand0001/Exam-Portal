@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GraduationCap, ChevronLeft, ChevronRight, Flag, Eye, Calculator, X, AlertTriangle, Lock } from 'lucide-react';
 
 interface Question {
@@ -27,6 +28,7 @@ interface Toast {
 }
 
 const ExamPage: React.FC = () => {
+  const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [timeRemaining, setTimeRemaining] = useState(1200);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
@@ -424,19 +426,19 @@ const ExamPage: React.FC = () => {
         sessionStorage.removeItem('studentSession');
         
         // Navigate to submitted page
-        window.location.href = '/submitted';
+        navigate('/submitted', { replace: true });
       } else {
         // Clear student session even on error
         sessionStorage.removeItem('studentSession');
         // Redirect to submitted page even if there's an error
-        window.location.href = '/submitted';
+        navigate('/submitted', { replace: true });
       }
     } catch (error) {
       console.error('Error submitting exam:', error);
       // Clear student session even on error
       sessionStorage.removeItem('studentSession');
       // Redirect to submitted page even if there's an error
-      window.location.href = '/submitted';
+      navigate('/submitted', { replace: true });
     }
   };
 

@@ -5,13 +5,13 @@ const { saveExamResults, pool } = require('../database');
 // Submit exam results
 router.post('/submit', async (req, res) => {
   try {
-    const { CandidateId, CandidateName, phoneNumber, dateOfBirth, answers } = req.body;
+    const { studentId, studentName, phoneNumber, dateOfBirth, answers } = req.body;
 
     // Validate required fields
-    if (!CandidateId || !CandidateName || !phoneNumber || !dateOfBirth || !answers) {
+    if (!studentId || !studentName || !phoneNumber || !dateOfBirth || !answers) {
       return res.status(400).json({
         success: false,
-        message: 'Missing required fields: CandidateId, CandidateName, phoneNumber, dateOfBirth, answers'
+        message: 'Missing required fields: studentId, studentName, phoneNumber, dateOfBirth, answers'
       });
     }
 
@@ -24,7 +24,7 @@ router.post('/submit', async (req, res) => {
     }
 
     // Save exam results
-    const result = await saveExamResults(CandidateId, CandidateName, phoneNumber, dateOfBirth, answers);
+    const result = await saveExamResults(studentId, studentName, phoneNumber, dateOfBirth, answers);
 
     res.status(200).json({
       success: true,
@@ -41,14 +41,14 @@ router.post('/submit', async (req, res) => {
   }
 });
 
-// Get exam results by Candidate ID
-router.get('/Candidate/:CandidateId', async (req, res) => {
+// Get exam results by student ID
+router.get('/student/:studentId', async (req, res) => {
   try {
-    const { CandidateId } = req.params;
+    const { studentId } = req.params;
 
     const result = await pool.query(
-      'SELECT * FROM exam_results WHERE Candidate_id = $1 ORDER BY exam_date DESC',
-      [CandidateId]
+      'SELECT * FROM exam_results WHERE student_id = $1 ORDER BY exam_date DESC',
+      [studentId]
     );
 
     res.status(200).json({

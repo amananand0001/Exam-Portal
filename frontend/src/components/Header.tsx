@@ -30,7 +30,7 @@ const Header: React.FC = () => {
           </div>
           <div className="flex justify-end space-x-5">
             <span>info@nursingexamportal.com</span>
-            <span>CandidateS</span>
+            <span>CANDIDATE</span>
             <span>FACULTY</span>
             <span>ALUMNI</span>
             <span>SUPPORT@NURSINGEXAMPORTAL.COM</span>

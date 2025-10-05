@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ExamInstructionsPage: React.FC = () => {
   const [agreedToIntegrity, setAgreedToIntegrity] = useState(false);
-  const [CandidateData, setCandidateData] = useState({ CandidateId: '', name: '' });
+  const [studentData, setstudentData] = useState({ studentId: '', name: '' });
   const navigate = useNavigate();
 
   // Get present date
@@ -19,12 +19,12 @@ const ExamInstructionsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    // Fetch Candidate data from session storage
-    const sessionData = sessionStorage.getItem('CandidateSession');
+    // Fetch student data from session storage
+    const sessionData = sessionStorage.getItem('studentSession');
     if (sessionData) {
       const parsedData = JSON.parse(sessionData);
-      setCandidateData({
-        CandidateId: parsedData.CandidateId || '',
+      setstudentData({
+        studentId: parsedData.studentId || '',
         name: parsedData.name || ''
       });
     } else {
@@ -42,7 +42,7 @@ const ExamInstructionsPage: React.FC = () => {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem('CandidateSession');
+    sessionStorage.removeItem('studentSession');
     navigate('/login');
   };
 
@@ -57,8 +57,8 @@ const ExamInstructionsPage: React.FC = () => {
               <span className="text-base sm:text-xl font-semibold text-white">Nursing Exam Portal</span>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm">
-              <span className="text-white">Candidate ID: {CandidateData.CandidateId}</span>
-              <span className="text-white">Candidate Name: {CandidateData.name}</span>
+              <span className="text-white">Candidate ID: {studentData.studentId}</span>
+              <span className="text-white">Candidate Name: {studentData.name}</span>
               <button
                 onClick={handleLogout}
                 className="text-white hover:text-gray-900 text-xs sm:text-sm bg-transparent border border-gray-300 px-2 sm:px-3 py-1 rounded hover:bg-gray-50 transition-colors"

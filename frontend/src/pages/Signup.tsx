@@ -15,7 +15,7 @@ const SignupPage: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
-  const [CandidateId, setCandidateId] = useState('');
+  const [studentId, setstudentId] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const SignupPage: React.FC = () => {
 
     try {
       const apiBaseUrl = (import.meta as any).env?.VITE_API_BASE_URL || '';
-      const signupUrl = `${apiBaseUrl}/api/Candidates/signup`;
+      const signupUrl = `${apiBaseUrl}/api/students/signup`;
       const response = await fetch(signupUrl, {
         method: 'POST',
         headers: {
@@ -50,19 +50,19 @@ const SignupPage: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess(`Registration successful! Your Candidate ID is: ${data.data.CandidateId}`);
-        setCandidateId(data.data.CandidateId);
+        setSuccess(`Registration successful! Your Candidate ID is: ${data.data.studentId}`);
+        setstudentId(data.data.studentId);
         setIsRegistered(true);
         
         // Store session data
         const sessionData = {
-          CandidateId: data.data.CandidateId,
+          studentId: data.data.studentId,
           name: name,
           dateOfBirth: dateOfBirth,
           phoneNumber: phoneNumber,
           countryCode: countryCode
         };
-        sessionStorage.setItem('CandidateSession', JSON.stringify(sessionData));
+        sessionStorage.setItem('studentSession', JSON.stringify(sessionData));
         
         // Don't reset form fields - keep them visible but disabled
       } else {

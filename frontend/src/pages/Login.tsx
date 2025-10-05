@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     setIsUnlocking(true);
 
     try {
-      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/Candidates/login', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/students/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,13 +41,13 @@ const LoginPage: React.FC = () => {
         
         // Store session data
         const sessionData = {
-          CandidateId: data.data.CandidateId,
+          studentId: data.data.studentId,
           name: data.data.name,
           dateOfBirth: data.data.dateOfBirth,
           phoneNumber: data.data.phoneNumber,
           countryCode: data.data.countryCode
         };
-        sessionStorage.setItem('CandidateSession', JSON.stringify(sessionData));
+        sessionStorage.setItem('studentSession', JSON.stringify(sessionData));
         
         // Redirect to exam instructions after a short delay
         setTimeout(() => {

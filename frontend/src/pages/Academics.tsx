@@ -101,11 +101,11 @@ const Academics: React.FC = () => {
                 </div>
                 <div className="bg-blue-600 text-white p-6 rounded-lg text-center">
                   <div className="text-3xl font-bold mb-2">90%</div>
-                  <div className="text-sm">OF CandidateS RECEIVE SOME FORM OF FINANCIAL AID</div>
+                  <div className="text-sm">OF studentS RECEIVE SOME FORM OF FINANCIAL AID</div>
                 </div>
                 <div className="bg-blue-600 text-white p-6 rounded-lg text-center">
                   <div className="text-3xl font-bold mb-2">95%</div>
-                  <div className="text-sm">OF CandidateS GRADUATE IN FOUR YEARS</div>
+                  <div className="text-sm">OF studentS GRADUATE IN FOUR YEARS</div>
                 </div>
                 <div className="bg-blue-600 text-white p-6 rounded-lg text-center">
                   <div className="text-3xl font-bold mb-2">100%</div>

@@ -52,14 +52,14 @@ function AppContent() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/exam-instructions" element={
-          <ProtectedRoute requiredSession="CandidateSession">
+          <ProtectedRoute requiredSession="studentSession">
             <ExamRouteGuard>
               <ExamInstructionsPage />
             </ExamRouteGuard>
           </ProtectedRoute>
         } />
         <Route path="/exam" element={
-          <ProtectedRoute requiredSession="CandidateSession">
+          <ProtectedRoute requiredSession="studentSession">
             <ExamRouteGuard>
               <ExamPage />
             </ExamRouteGuard>

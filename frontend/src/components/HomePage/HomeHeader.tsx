@@ -20,7 +20,7 @@ const Header = () => {
             </p>
             <div className="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4 lg:gap-6">
               <button className="text-xs font-barlow font-bold leading-4 tracking-wider uppercase text-global-1 hover:opacity-80 transition-opacity">
-                Candidate
+                student
               </button>
               <button className="text-xs font-barlow font-bold leading-4 tracking-wider uppercase text-global-1 hover:opacity-80 transition-opacity">
                 Staff

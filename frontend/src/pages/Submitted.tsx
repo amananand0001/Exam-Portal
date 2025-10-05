@@ -8,8 +8,8 @@ interface ExamResults {
   answerDetails: any;
 }
 
-interface StudentData {
-  studentId: string;
+interface CandidateData {
+  CandidateId: string;
   name: string;
   phoneNumber: string;
   dateOfBirth: string;
@@ -19,7 +19,7 @@ const Submitted: React.FC = () => {
   const [showContent, setShowContent] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [examResults, setExamResults] = useState<ExamResults | null>(null);
-  const [studentData, setStudentData] = useState<StudentData | null>(null);
+  const [CandidateData, setCandidateData] = useState<CandidateData | null>(null);
 
   useEffect(() => {
     // Fetch exam results from session storage
@@ -33,21 +33,21 @@ const Submitted: React.FC = () => {
       }
     }
 
-    // Fetch student data from exam results (since student session is cleared)
+    // Fetch Candidate data from exam results (since Candidate session is cleared)
     if (resultsData) {
       try {
         const parsedResults = JSON.parse(resultsData);
-        // Extract student data from exam results
+        // Extract Candidate data from exam results
         if (parsedResults.answerDetails) {
-          setStudentData({
-            studentId: parsedResults.answerDetails.student_id || '',
-            name: parsedResults.answerDetails.student_name || '',
+          setCandidateData({
+            CandidateId: parsedResults.answerDetails.Candidate_id || '',
+            name: parsedResults.answerDetails.Candidate_name || '',
             phoneNumber: parsedResults.answerDetails.phone_number || '',
             dateOfBirth: parsedResults.answerDetails.date_of_birth || ''
           });
         }
       } catch (error) {
-        console.error('Error parsing student data from results:', error);
+        console.error('Error parsing Candidate data from results:', error);
       }
     }
 
@@ -143,17 +143,17 @@ const Submitted: React.FC = () => {
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">Your Exam Score</h3>
                 </div>
                 
-                {/* Student Info */}
-                {studentData && (
+                {/* Candidate Info */}
+                {CandidateData && (
                   <div className="mb-4 p-3 bg-gray-50 rounded-lg">
                     <div className="flex flex-col sm:flex-row justify-center items-center space-y-1 sm:space-y-0 sm:space-x-4 text-sm">
                       <div className="flex items-center">
-                        <span className="font-medium text-gray-700">Student:</span>
-                        <span className="ml-1 text-gray-900 font-semibold">{studentData.name}</span>
+                        <span className="font-medium text-gray-700">Candidate:</span>
+                        <span className="ml-1 text-gray-900 font-semibold">{CandidateData.name}</span>
                       </div>
                       <div className="flex items-center">
                         <span className="font-medium text-gray-700">ID:</span>
-                        <span className="ml-1 text-gray-900 font-semibold">{studentData.studentId}</span>
+                        <span className="ml-1 text-gray-900 font-semibold">{CandidateData.CandidateId}</span>
                       </div>
                     </div>
                   </div>

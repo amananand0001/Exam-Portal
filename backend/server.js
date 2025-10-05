@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const { initializeDatabase, testConnection, seedQuestions } = require('./database');
-const studentsRoutes = require('./routes/students');
+const CandidatesRoutes = require('./routes/Candidates');
 const questionsRoutes = require('./routes/questions');
 const resultsRoutes = require('./routes/results');
 const contactsRoutes = require('./routes/contacts');
@@ -76,7 +76,7 @@ app.get('/health', (req, res) => {
 });
 
             // API routes
-            app.use('/api/students', studentsRoutes);
+            app.use('/api/Candidates', CandidatesRoutes);
             app.use('/api/questions', questionsRoutes);
             app.use('/api/results', resultsRoutes);
             app.use('/api/contacts', contactsRoutes);
@@ -121,7 +121,7 @@ app.use((error, req, res, next) => {
                   console.log(`🚀 Server running on port ${PORT}`);
                   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
                   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-                  console.log(`📚 API docs: http://localhost:${PORT}/api/students`);
+                  console.log(`📚 API docs: http://localhost:${PORT}/api/Candidates`);
                   console.log(`❓ Questions API: http://localhost:${PORT}/api/questions`);
                   console.log(`📧 Contacts API: http://localhost:${PORT}/api/contacts`);
                 });

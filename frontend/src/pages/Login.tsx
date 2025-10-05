@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     setIsUnlocking(true);
 
     try {
-      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/students/login', {
+      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/Candidates/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,13 +41,13 @@ const LoginPage: React.FC = () => {
         
         // Store session data
         const sessionData = {
-          studentId: data.data.studentId,
+          CandidateId: data.data.CandidateId,
           name: data.data.name,
           dateOfBirth: data.data.dateOfBirth,
           phoneNumber: data.data.phoneNumber,
           countryCode: data.data.countryCode
         };
-        sessionStorage.setItem('studentSession', JSON.stringify(sessionData));
+        sessionStorage.setItem('CandidateSession', JSON.stringify(sessionData));
         
         // Redirect to exam instructions after a short delay
         setTimeout(() => {
@@ -55,8 +55,8 @@ const LoginPage: React.FC = () => {
         }, 1500);
         
       } else if (response.status === 409 && data.hasAttempted) {
-        // Student has already attempted the exam
-        setError('Student has already attempted the exam');
+        // Candidate has already attempted the exam
+        setError('Candidate has already attempted the exam');
         setShowReturnHome(true);
       } else {
         setError(data.message || 'Login failed. Please check your credentials and try again.');
@@ -110,7 +110,7 @@ const LoginPage: React.FC = () => {
           {/* Login Form */}
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Student Login</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Candidate Login</h2>
               <p className="text-gray-600 text-sm">Please enter your credentials to access the exam portal</p>
             </div>
 

@@ -15,7 +15,7 @@ const SignupPage: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
-  const [studentId, setStudentId] = useState('');
+  const [CandidateId, setCandidateId] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,9 @@ const SignupPage: React.FC = () => {
     setIsUnlocking(true);
 
     try {
-      const response = await fetch('https://exam-portal-7hg7.onrender.com/api/students/signup', {
+      const apiBaseUrl = (import.meta as any).env?.VITE_API_BASE_URL || '';
+      const signupUrl = `${apiBaseUrl}/api/Candidates/signup`;
+      const response = await fetch(signupUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,19 +50,19 @@ const SignupPage: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess(`Registration successful! Your Student ID is: ${data.data.studentId}`);
-        setStudentId(data.data.studentId);
+        setSuccess(`Registration successful! Your Candidate ID is: ${data.data.CandidateId}`);
+        setCandidateId(data.data.CandidateId);
         setIsRegistered(true);
         
         // Store session data
         const sessionData = {
-          studentId: data.data.studentId,
+          CandidateId: data.data.CandidateId,
           name: name,
           dateOfBirth: dateOfBirth,
           phoneNumber: phoneNumber,
           countryCode: countryCode
         };
-        sessionStorage.setItem('studentSession', JSON.stringify(sessionData));
+        sessionStorage.setItem('CandidateSession', JSON.stringify(sessionData));
         
         // Don't reset form fields - keep them visible but disabled
       } else {
@@ -108,7 +110,7 @@ const SignupPage: React.FC = () => {
           {/* Signup Form */}
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Student Sign-Up</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Candidate Sign-Up</h2>
               <p className="text-gray-600 text-sm">Please enter your credentials to access the exam portal</p>
             </div>
 
@@ -237,7 +239,7 @@ const SignupPage: React.FC = () => {
                       <Lock className="h-5 w-5 text-slate-300 group-hover:text-slate-200 transition-all duration-300" />
                     )}
                   </span>
-                  {isLoading ? 'Registering...' : isRegistered ? 'Access Exam' : 'Register Student'}
+                  {isLoading ? 'Registering...' : isRegistered ? 'Access Exam' : 'Register Candidate'}
                 </button>
               </div>
 

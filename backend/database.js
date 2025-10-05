@@ -10,11 +10,11 @@ const pool = new Pool({
 // Initialize database tables
 const initializeDatabase = async () => {
   try {
-    // Create students table
-    const createStudentsTable = `
-      CREATE TABLE IF NOT EXISTS students (
+    // Create Candidates table
+    const createCandidatesTable = `
+      CREATE TABLE IF NOT EXISTS Candidates (
         id SERIAL PRIMARY KEY,
-        student_id VARCHAR(20) UNIQUE NOT NULL,
+        Candidate_id VARCHAR(20) UNIQUE NOT NULL,
         name VARCHAR(255) NOT NULL,
         date_of_birth DATE NOT NULL,
         phone_number VARCHAR(20) NOT NULL,
@@ -43,8 +43,8 @@ const initializeDatabase = async () => {
     const createExamResultsTable = `
       CREATE TABLE IF NOT EXISTS exam_results (
         id SERIAL PRIMARY KEY,
-        student_id VARCHAR(20) NOT NULL,
-        student_name VARCHAR(255) NOT NULL,
+        Candidate_id VARCHAR(20) NOT NULL,
+        Candidate_name VARCHAR(255) NOT NULL,
         phone_number VARCHAR(20) NOT NULL,
         date_of_birth DATE NOT NULL,
         exam_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -53,7 +53,7 @@ const initializeDatabase = async () => {
         percentage DECIMAL(5,2) NOT NULL,
         answers JSONB NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+        FOREIGN KEY (Candidate_id) REFERENCES Candidates(Candidate_id) ON DELETE CASCADE
       );
     `;
 
@@ -71,16 +71,16 @@ const initializeDatabase = async () => {
 
     // Create indexes for faster lookups
     const createIndexes = `
-      CREATE INDEX IF NOT EXISTS idx_student_id ON students(student_id);
-      CREATE INDEX IF NOT EXISTS idx_phone_number ON students(phone_number);
+      CREATE INDEX IF NOT EXISTS idx_Candidate_id ON Candidates(Candidate_id);
+      CREATE INDEX IF NOT EXISTS idx_phone_number ON Candidates(phone_number);
       CREATE INDEX IF NOT EXISTS idx_questions_answer ON questions(answer);
-      CREATE INDEX IF NOT EXISTS idx_exam_results_student_id ON exam_results(student_id);
+      CREATE INDEX IF NOT EXISTS idx_exam_results_Candidate_id ON exam_results(Candidate_id);
       CREATE INDEX IF NOT EXISTS idx_exam_results_exam_date ON exam_results(exam_date);
       CREATE INDEX IF NOT EXISTS idx_contacts_email ON contacts(email);
       CREATE INDEX IF NOT EXISTS idx_contacts_created_at ON contacts(created_at);
     `;
 
-    await pool.query(createStudentsTable);
+    await pool.query(createCandidatesTable);
     await pool.query(createQuestionsTable);
     await pool.query(createExamResultsTable);
     await pool.query(createContactsTable);
@@ -93,23 +93,23 @@ const initializeDatabase = async () => {
   }
 };
 
-// Generate unique student ID
-const generateStudentId = async () => {
+// Generate unique Candidate ID
+const generateCandidateId = async () => {
   const currentYear = new Date().getFullYear();
 
   try {
-    // Get the count of students for this year
+    // Get the count of Candidates for this year
     const result = await pool.query(
-      'SELECT COUNT(*) as count FROM students WHERE student_id LIKE $1',
+      'SELECT COUNT(*) as count FROM Candidates WHERE Candidate_id LIKE $1',
       [`${currentYear}%`]
     );
 
     const count = parseInt(result.rows[0].count) + 1;
-    const studentId = `${currentYear}${count.toString().padStart(4, '0')}`;
+    const CandidateId = `${currentYear}${count.toString().padStart(4, '0')}`;
 
-    return studentId;
+    return CandidateId;
   } catch (error) {
-    console.error('Error generating student ID:', error);
+    console.error('Error generating Candidate ID:', error);
     throw error;
   }
 };
@@ -147,7 +147,7 @@ const seedQuestions = async () => {
 };
 
 // Save exam results
-const saveExamResults = async (studentId, studentName, phoneNumber, dateOfBirth, answers) => {
+const saveExamResults = async (CandidateId, CandidateName, phoneNumber, dateOfBirth, answers) => {
   try {
     // Get correct answers from questions table
     const questionsResult = await pool.query('SELECT id, answer FROM questions ORDER BY id');
@@ -160,8 +160,8 @@ const saveExamResults = async (studentId, studentName, phoneNumber, dateOfBirth,
     for (let i = 0; i < correctAnswers.length; i++) {
       const questionId = i + 1;
       const correctAnswer = correctAnswers[i].answer;
-      const studentAnswer = answers[questionId] || null;
-      const isCorrect = studentAnswer === correctAnswer;
+      const CandidateAnswer = answers[questionId] || null;
+      const isCorrect = CandidateAnswer === correctAnswer;
       
       if (isCorrect) {
         marksObtained++;
@@ -169,7 +169,7 @@ const saveExamResults = async (studentId, studentName, phoneNumber, dateOfBirth,
       
       answerDetails.push({
         questionId,
-        studentAnswer,
+        CandidateAnswer,
         correctAnswer,
         isCorrect
       });
@@ -181,10 +181,10 @@ const saveExamResults = async (studentId, studentName, phoneNumber, dateOfBirth,
     // Insert exam result
     const result = await pool.query(
       `INSERT INTO exam_results 
-       (student_id, student_name, phone_number, date_of_birth, marks_obtained, total_marks, percentage, answers)
+       (Candidate_id, Candidate_name, phone_number, date_of_birth, marks_obtained, total_marks, percentage, answers)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING *`,
-      [studentId, studentName, phoneNumber, dateOfBirth, marksObtained, totalMarks, percentage, JSON.stringify(answerDetails)]
+      [CandidateId, CandidateName, phoneNumber, dateOfBirth, marksObtained, totalMarks, percentage, JSON.stringify(answerDetails)]
     );
     
     return {
@@ -237,7 +237,7 @@ const testConnection = async () => {
 module.exports = {
   pool,
   initializeDatabase,
-  generateStudentId,
+  generateCandidateId,
   seedQuestions,
   saveExamResults,
   saveContact,

@@ -30,7 +30,7 @@ const ExamPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [timeRemaining, setTimeRemaining] = useState(1200);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
-  const [studentData, setStudentData] = useState({ studentId: '', name: '' });
+  const [CandidateData, setCandidateData] = useState({ CandidateId: '', name: '' });
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showCalculator, setShowCalculator] = useState(false);
@@ -239,17 +239,17 @@ const ExamPage: React.FC = () => {
     };
   }, []);
 
-  // Fetch student data from session storage and questions from API
+  // Fetch Candidate data from session storage and questions from API
   useEffect(() => {
     const fetchData = async () => {
       try {
 
-        // Fetch student data from session storage
-        const sessionData = sessionStorage.getItem('studentSession');
+        // Fetch Candidate data from session storage
+        const sessionData = sessionStorage.getItem('CandidateSession');
         if (sessionData) {
           const parsedData = JSON.parse(sessionData);
-          setStudentData({
-            studentId: parsedData.studentId || '',
+          setCandidateData({
+            CandidateId: parsedData.CandidateId || '',
             name: parsedData.name || ''
           });
         }
@@ -389,15 +389,15 @@ const ExamPage: React.FC = () => {
         }
       });
 
-      // Get student data from session
-      const sessionData = sessionStorage.getItem('studentSession');
+      // Get Candidate data from session
+      const sessionData = sessionStorage.getItem('CandidateSession');
       if (!sessionData) {
         // Redirect to login if session not found
         window.location.href = '/login';
         return;
       }
 
-      const studentSession = JSON.parse(sessionData);
+      const CandidateSession = JSON.parse(sessionData);
 
       // Submit exam results
       const response = await fetch('https://exam-portal-7hg7.onrender.com/api/results/submit', {
@@ -406,10 +406,10 @@ const ExamPage: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          studentId: studentSession.studentId,
-          studentName: studentSession.name,
-          phoneNumber: studentSession.phoneNumber,
-          dateOfBirth: studentSession.dateOfBirth,
+          CandidateId: CandidateSession.CandidateId,
+          CandidateName: CandidateSession.name,
+          phoneNumber: CandidateSession.phoneNumber,
+          dateOfBirth: CandidateSession.dateOfBirth,
           answers: answers
         })
       });
@@ -420,21 +420,21 @@ const ExamPage: React.FC = () => {
         // Store results in session for display
         sessionStorage.setItem('examResults', JSON.stringify(data.data));
         
-        // Clear student session to prevent re-access to exam
-        sessionStorage.removeItem('studentSession');
+        // Clear Candidate session to prevent re-access to exam
+        sessionStorage.removeItem('CandidateSession');
         
         // Navigate to submitted page
         window.location.href = '/submitted';
       } else {
-        // Clear student session even on error
-        sessionStorage.removeItem('studentSession');
+        // Clear Candidate session even on error
+        sessionStorage.removeItem('CandidateSession');
         // Redirect to submitted page even if there's an error
         window.location.href = '/submitted';
       }
     } catch (error) {
       console.error('Error submitting exam:', error);
-      // Clear student session even on error
-      sessionStorage.removeItem('studentSession');
+      // Clear Candidate session even on error
+      sessionStorage.removeItem('CandidateSession');
       // Redirect to submitted page even if there's an error
       window.location.href = '/submitted';
     }
@@ -579,8 +579,8 @@ const ExamPage: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm">
-              <span className="text-white">Student ID: {studentData.studentId}</span>
-              <span className="text-white">Student Name: {studentData.name}</span>
+              <span className="text-white">Candidate ID: {CandidateData.CandidateId}</span>
+              <span className="text-white">Candidate Name: {CandidateData.name}</span>
               {tabSwitchCount > 0 && (
                 <div className="flex items-center space-x-1 px-2 py-1 bg-red-600 rounded-full">
                   <span className="text-xs text-white font-medium">TAB SWITCHES: {tabSwitchCount}/3</span>
